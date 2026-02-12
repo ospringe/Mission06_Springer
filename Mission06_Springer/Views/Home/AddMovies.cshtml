@@ -1,0 +1,81 @@
+@model Mission06_Springer.Models.Movie
+
+@{
+    ViewData["Title"] = "Add Movie";
+}
+
+<h2>Add a Movie to the Collection</h2>
+
+<form asp-action="AddMovies" method="post">
+
+    <!-- Title -->
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <input asp-for="Category" class="form-control"/>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <!-- Year -->
+    <div class="mb-3">
+        <label asp-for="Year" class="form-label"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <!-- Director -->
+    <div class="mb-3">
+        <label asp-for="Director" class="form-label"></label>
+        <input asp-for="Director" class="form-control" />
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    <!-- Rating Dropdown -->
+    <div class="mb-3">
+        <label asp-for="Rating" class="form-label"></label>
+        <select asp-for="Rating" class="form-select">
+            <option value="">Select a Rating</option>
+            <option>G</option>
+            <option>PG</option>
+            <option>PG-13</option>
+            <option>R</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <!-- Edited (Yes / No) -->
+    <div class="mb-3">
+        <label class="form-label">Edited</label>
+        <select asp-for="Edited" class="form-select">
+            <option value="">Select an option</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <span asp-validation-for="Edited" class="text-danger"></span>
+    </div>
+
+    <!-- Lent To (Optional) -->
+    <div class="mb-3">
+        <label asp-for="LentTo" class="form-label"></label>
+        <input asp-for="LentTo" class="form-control" />
+        <span asp-validation-for="LentTo" class="text-danger"></span>
+    </div>
+
+    <!-- Notes (Optional, 25 char limit enforced in model) -->
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <input asp-for="Notes" class="form-control" maxlength="25"/>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Add Movie</button>
+
+</form>
+
