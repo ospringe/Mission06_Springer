@@ -37,5 +37,22 @@ app.MapControllerRoute(
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MovieCollectionContext>();
+    
+    context.Database.EnsureCreated(); // Ensures database exists
+
+    if (!context.Movies.Any()) // Only seed if empty
+    {
+        context.Movies.AddRange(
+            new Movie { Title = "Interstellar", Category = "Sci-Fi", Year = 2014, Director = "Christopher Nolan", Rating = "PG-13" },
+            new Movie { Title = "The Princess Bride", Category = "Fantasy", Year = 1987, Director = "Rob Reiner", Rating = "PG" },
+            new Movie { Title = "Pride & Prejudice", Category = "Romance", Year = 2005, Director = "Joe Wright", Rating = "PG" }
+        );
+
+        context.SaveChanges();
+    }
+}
 
 app.Run();
