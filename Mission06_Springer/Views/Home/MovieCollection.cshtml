@@ -33,6 +33,7 @@
                 </thead>
 
                 <tbody>
+                <!-- Loop through and display each movie in database -->
                 @foreach (var x in Model)
                 {
                     <tr>
@@ -57,8 +58,8 @@
                         </td>
 
                         <td class="muted">@x.Notes</td>
-                        
-                        @* Edit button *@
+
+                        <!-- Edit button -->
                         <td class="text-end pe-4">
                             <a asp-controller="Home"
                                asp-action="Edit"
@@ -66,6 +67,7 @@
                                class="btn btn-sm btn-outline-dark rounded-pill px-3">
                                 Edit
                             </a>
+                            <!-- Delete button -->
                             <a asp-controller="Home"
                                asp-action="Delete"
                                asp-route-id="@x.MovieId"
