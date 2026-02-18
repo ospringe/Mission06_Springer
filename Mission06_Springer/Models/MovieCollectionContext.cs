@@ -12,4 +12,5 @@ public class MovieCollectionContext : DbContext
     }
     
     public DbSet<Movie> Movies { get; set; } // Creating a database set of type 'Movie' that we are going to refer to as 'Movies.' (When we create the database, the table is going to be called 'Movies'?)
+    public DbSet<Category> Categories { get; set; }
 }

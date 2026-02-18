@@ -1,0 +1,43 @@
+@model Movie
+
+@{
+    ViewData["Title"] = "Delete Movie";
+}
+
+<div class="container d-flex justify-content-center py-5">
+
+    <div class="card shadow-sm border-0 rounded-4 p-4" style="max-width: 500px; width: 100%;">
+        
+        <h4 class="mb-3 text-center">Confirm Deletion</h4>
+
+        <p class="text-center text-muted mb-4">
+            Are you sure you want to delete 
+            <span class="fw-semibold text-dark">"@Model.Title"</span> 
+            from the collection?
+        </p>
+
+        <form asp-action="Delete" method="post">
+            
+            <!-- Important: send the MovieId back -->
+            <input type="hidden" asp-for="MovieId" />
+
+            <div class="d-flex justify-content-center gap-3">
+                
+                <!-- Delete Button -->
+                <button type="submit" 
+                        class="btn btn-danger px-4 rounded-pill">
+                    Delete
+                </button>
+
+                <!-- Cancel Button -->
+                <a asp-action="MovieCollection" 
+                   class="btn btn-outline-secondary px-4 rounded-pill">
+                    Cancel
+                </a>
+
+            </div>
+        </form>
+
+    </div>
+
+</div>

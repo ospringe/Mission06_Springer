@@ -1,4 +1,4 @@
-@model Mission06_Springer.Models.Movie
+@model Movie
 
 @{
     ViewData["Title"] = "Add Movie";
@@ -6,8 +6,11 @@
 
 <h2>Add a Movie to the Collection</h2>
 
-<form asp-action="AddMovies" method="post">
+<form method="post">
 
+    <input type="hidden" asp-for="MovieId" />
+    <br/>
+    
     <!-- Title -->
     <div class="mb-3">
         <label asp-for="Title" class="form-label"></label>
@@ -17,9 +20,13 @@
 
     <!-- Category -->
     <div class="mb-3">
-        <label asp-for="Category" class="form-label"></label>
-        <input asp-for="Category" class="form-control"/>
-        <span asp-validation-for="Category" class="text-danger"></span>
+        <select asp-for="CategoryId" class="form-select">
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+        </select>
     </div>
 
     <!-- Year -->
@@ -66,6 +73,17 @@
         <input asp-for="LentTo" class="form-control" />
         <span asp-validation-for="LentTo" class="text-danger"></span>
     </div>
+    
+    <!-- Copied to Plex (Yes / No) -->
+    <div class="mb-3">
+        <label class="form-label">Copied to Plex</label>
+        <select asp-for="CopiedToPlex" class="form-select">
+            <option value="">Select an option</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <span asp-validation-for="CopiedToPlex" class="text-danger"></span>
+    </div>
 
     <!-- Notes (Optional, 25 char limit enforced in model) -->
     <div class="mb-3">
@@ -75,7 +93,11 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Add Movie</button>
+    <button type="submit" class="btn btn-primary">Submit Movie</button>
+    
+    <div asp-validation-summary="All"></div>
 
 </form>
+
+<a asp-controller="Home" asp-action="MovieCollection" class="btn btn-outline-primary">View Collection</a>
 

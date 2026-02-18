@@ -1,0 +1,83 @@
+@model List<Movie>
+
+@{
+    ViewData["Title"] = "Movie Collection";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="mb-1">Movie Collection</h2>
+            <div class="text-muted">All movies currently in Joel’s collection</div>
+        </div>
+        <a class="btn btn-primary" asp-action="AddMovies">Add Movie</a>
+    </div>
+
+    <div class="movie-table-wrap">
+        <div class="movie-table-scroll">
+            <table class="table movie-table mb-0">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th class="text-end">Year</th>
+                    <th>Director</th>
+                    <th>Rating</th>
+                    <th class="text-center">Edited</th>
+                    <th>Lent To</th>
+                    <th class="text-center">Plex</th>
+                    <th>Notes</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td class="title">@x.Title</td>
+                        <td class="muted">@x.Category?.CategoryName</td> @* The '?' here basically says "Only try to access Category Name if Category is NOT null" *@
+                        <td class="text-end">@x.Year</td>
+                        <td class="muted">@x.Director</td>
+                        <td class="muted">@x.Rating</td>
+
+                        <td class="text-center">
+                            <span class="pill @(x.Edited == true ? "pill-yes" : "pill-no")">
+                                @(x.Edited == true ? "Yes" : "No")
+                            </span>
+                        </td>
+
+                        <td class="muted">@x.LentTo</td>
+
+                        <td class="text-center">
+                            <span class="pill @(x.CopiedToPlex == true ? "pill-yes" : "pill-no")">
+                                @(x.CopiedToPlex == true ? "Yes" : "No")
+                            </span>
+                        </td>
+
+                        <td class="muted">@x.Notes</td>
+                        
+                        @* Edit button *@
+                        <td class="text-end pe-4">
+                            <a asp-controller="Home"
+                               asp-action="Edit"
+                               asp-route-id="@x.MovieId"
+                               class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                                Edit
+                            </a>
+                            <a asp-controller="Home"
+                               asp-action="Delete"
+                               asp-route-id="@x.MovieId"
+                               class="btn btn-sm btn-danger rounded-pill px-3">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
